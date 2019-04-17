@@ -1,10 +1,12 @@
 package com.bot.botapakah;
 
+import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -15,6 +17,9 @@ import java.util.concurrent.ExecutionException;
 
 @SpringBootApplication
 public class BotApakahApplication extends SpringBootServletInitializer {
+
+    @Autowired
+    public LineMessagingClient lineMessagingClient;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -50,7 +55,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public void replyChatWithRandomAnswer(String replyToken, String answer) {
         TextMessage answerInMessage = new TextMessage(answer);
         try {
-            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, answerInMessage).get());
+            lineMessagingClient
+                    .replyMessage(new ReplyMessage(replyToken, answerInMessage))
+                    .get();
         } catch (InterruptedException | ExecutionException e) {
             System.out.println("Ada error saat ingin membalas chat");
         }
