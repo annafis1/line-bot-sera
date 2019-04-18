@@ -37,11 +37,22 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
         String msg = messageEvent.getMessage().getText().toLowerCase();
         String[] msgSplit = msg.split(" ");
-        if (msgSplit[0].equals("apakah")) {
+        if (msgSplit[0].equals("/apakah")) {
             String answer = getRandomAnswer();
             String replyToken = messageEvent.getReplyToken();
             replyChatWithRandomAnswer(replyToken, answer);
+        } if (msgSplit[0].equals("/help")) {
+            String answer = getInfo();
+            String replyToken = messageEvent.getReplyToken();
+            replyChatWithRandomAnswer(replyToken, answer);
         }
+    }
+
+    public String getInfo() {
+        return "Nama ku Sera, inilah beberapa instruksi yang bisa ku jalankan ^_^:" +
+                "\n - /help" +
+                "\n - /apakah <statement yang kamu ingin tanya>" +
+                "\n Terima kasih :D, selamat mencoba";
     }
 
     public String getRandomAnswer() {
