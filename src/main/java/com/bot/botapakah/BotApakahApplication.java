@@ -41,7 +41,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             replyChatWithRandomAnswer(replyToken, answer);
         }
     }
-
+    
     public String getRandomAnswer() {
         Random random = new Random();
         int num = random.nextInt();
