@@ -49,10 +49,10 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String getInfo() {
-        return "Nama ku Sera, inilah beberapa instruksi yang bisa ku jalankan ^_^:" +
+        return "Berikut beberapa instruksi yang bisa ku jalankan ^_^:" +
                 "\n - /help" +
                 "\n - /apakah <statement yang kamu ingin tanya>" +
-                "\n Terima kasih :D, selamat mencoba";
+                "\n Selamat mencoba";
     }
 
     public String getRandomAnswer() {
