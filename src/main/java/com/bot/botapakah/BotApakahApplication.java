@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 public class BotApakahApplication extends SpringBootServletInitializer {
 
     @Autowired
-    private LineMessagingClient lineMessagingClient;
+    public LineMessagingClient lineMessagingClient;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -37,14 +37,14 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
         String msg = messageEvent.getMessage().getText().toLowerCase();
         String[] msgSplit = msg.split(" ");
-        if (msgSplit[0].equals("test")) {
+        if (msgSplit[0].equals("apakah")) {
             String answer = getRandomAnswer();
             String replyToken = messageEvent.getReplyToken();
             replyChatWithRandomAnswer(replyToken, answer);
         }
     }
 
-    private String getRandomAnswer() {
+    public String getRandomAnswer() {
         String res = "";
         Random random = new Random();
         int num = random.nextInt();
@@ -55,7 +55,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         }
     }
 
-    private void replyChatWithRandomAnswer(String replyToken, String answer) {
+    public void replyChatWithRandomAnswer(String replyToken, String answer) {
         TextMessage answerInMessage = new TextMessage(answer);
         try {
             lineMessagingClient.replyMessage(new ReplyMessage(replyToken, answerInMessage)).get();
