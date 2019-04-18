@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 
 @SpringBootApplication
-@LineMessageHandler
+
 public class BotApakahApplication extends SpringBootServletInitializer {
 
     @Autowired
