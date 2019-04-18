@@ -42,8 +42,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         }
     }
 
-    public void processChat(MessageEvent<TextMessageContent> message, String output) {
-        String replyToken = message.getReplyToken();
+    public void processChat(MessageEvent<TextMessageContent> event, String output) {
+        String replyToken = event.getReplyToken();
         replyChat(replyToken, output);
     }
 
@@ -67,7 +67,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
 
     public String getImageLink(String query) {
         if (query.equals("sehat")) {
-            return "";
+            return "https://images-na.ssl-images-amazon.com/images/I/41FAM8Tx18L._SX466_.jpg";
         } else if (query.equals("sedang")) {
             return "";
         } else if (query.equals("buruk")) {
