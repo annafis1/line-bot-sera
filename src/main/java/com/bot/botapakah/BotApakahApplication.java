@@ -58,7 +58,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String answer = getInfo();
             processChat(messageEvent, answer);
         } if (msgSplit[0].equals("/lihatbmi")) {
-            String category = msgSplit[1];
+            String category = msgSplit[1].toLowerCase();
             String answer = getImageLink(category);
             processChat(messageEvent, answer);
 
@@ -66,11 +66,11 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String getImageLink(String query) {
-        if (query.equals("Sehat")) {
+        if (query.equals("sehat")) {
             return "";
-        } else if (query.equals("Sedang")) {
+        } else if (query.equals("sedang")) {
             return "";
-        } else if (query.equals("Buruk")) {
+        } else if (query.equals("buruk")) {
             return "";
         } return "Tidak ada";
     }
