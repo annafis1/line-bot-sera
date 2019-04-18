@@ -19,7 +19,7 @@
 line.bot:
   channel-token: GyrJzzm5VxIfW/xWVwHnqxufJb/LnIiuFGSA9/dQ+l/0b7lJ53UVj5l/I0z2k0i+H/RkKE8tUCm7ae3onPz6XTYDJuNKeFdYLdsAN0tTADGOihuABq2nSyPvdvbdtQO2UIJE+CCNlsgUP1bIr+PxOwdB04t89/1O/w1cDnyilFU=
 
-  channel-secret: ccd92b8b9db89a2e90e6fb4e22f2836fy
+  channel-secret: ccd92b8b9db89a2e90e6fb4e22f2836f
 
   handler.path: /callback
 
