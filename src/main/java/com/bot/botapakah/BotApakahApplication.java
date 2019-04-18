@@ -33,9 +33,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
 
     @EventMapping
     public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
-        String msg = messageEvent.getMessage().getText().toLowerCase();
+        String msg = messageEvent.getMessage().getText();
         String[] msgSplit = msg.split(" ");
-        if (msgSplit[0].equals("apakah")) {
+        if (msgSplit[0].equals("Apakah")) {
             String answer = getRandomAnswer();
             String replyToken = messageEvent.getReplyToken();
             replyChatWithRandomAnswer(replyToken, answer);
@@ -55,9 +55,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public void replyChatWithRandomAnswer(String replyToken, String answer) {
         TextMessage answerInMessage = new TextMessage(answer);
         try {
-            lineMessagingClient
-                    .replyMessage(new ReplyMessage(replyToken, answerInMessage))
-                    .get();
+            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, answerInMessage)).get();
         } catch (InterruptedException | ExecutionException e) {
             System.out.println("Ada error saat ingin membalas chat");
         }
