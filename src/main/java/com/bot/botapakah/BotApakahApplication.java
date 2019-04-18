@@ -33,19 +33,46 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
 
+    public void replyChat(String replyToken, String answer) {
+        TextMessage answerInMessage = new TextMessage(answer);
+        try {
+            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, answerInMessage)).get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println("Ada error saat ingin membalas chat");
+        }
+    }
+
+    public void processChat(MessageEvent<TextMessageContent> message, String output) {
+        String replyToken = message.getReplyToken();
+        replyChat(replyToken, output);
+    }
+
     @EventMapping
     public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
         String msg = messageEvent.getMessage().getText().toLowerCase();
         String[] msgSplit = msg.split(" ");
         if (msgSplit[0].equals("/apakah")) {
             String answer = getRandomAnswer();
-            String replyToken = messageEvent.getReplyToken();
-            replyChatWithRandomAnswer(replyToken, answer);
+            processChat(messageEvent, answer);
         } if (msgSplit[0].equals("/help")) {
             String answer = getInfo();
-            String replyToken = messageEvent.getReplyToken();
-            replyChatWithRandomAnswer(replyToken, answer);
+            processChat(messageEvent, answer);
+        } if (msgSplit[0].equals("/lihatbmi")) {
+            String category = msgSplit[1];
+            String answer = getImageLink(category);
+            processChat(messageEvent, answer);
+
         }
+    }
+
+    public String getImageLink(String query) {
+        if (query.equals("Sehat")) {
+            return "";
+        } else if (query.equals("Sedang")) {
+            return "";
+        } else if (query.equals("Buruk")) {
+            return "";
+        } return "Tidak ada";
     }
 
     public String getInfo() {
@@ -63,14 +90,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         return listAnswer[num];
     }
 
-    public void replyChatWithRandomAnswer(String replyToken, String answer) {
-        TextMessage answerInMessage = new TextMessage(answer);
-        try {
-            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, answerInMessage)).get();
-        } catch (InterruptedException | ExecutionException e) {
-            System.out.println("Ada error saat ingin membalas chat");
-        }
-    }
+
 
 
 
