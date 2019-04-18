@@ -16,9 +16,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-
 @SpringBootApplication
-
+@LineMessageHandler
 public class BotApakahApplication extends SpringBootServletInitializer {
 
     @Autowired
@@ -33,37 +32,38 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         SpringApplication.run(BotApakahApplication.class, args);
     }
 
+
     @EventMapping
-    public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent){
-        String pesan = messageEvent.getMessage().getText().toLowerCase();
-        String[] pesanSplit = pesan.split(" ");
-        if(pesanSplit[0].equals("apakah")){
-            String jawaban = getRandomJawaban();
+    public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
+        String msg = messageEvent.getMessage().getText().toLowerCase();
+        String[] msgSplit = msg.split(" ");
+        if (msgSplit[0].equals("test")) {
+            String answer = getRandomAnswer();
             String replyToken = messageEvent.getReplyToken();
-            balasChatDenganRandomJawaban(replyToken, jawaban);
+            replyChatWithRandomAnswer(replyToken, answer);
         }
     }
 
-    private String getRandomJawaban(){
-        String jawaban = "";
-        int random = new Random().nextInt();
-        if(random%2==0){
-            jawaban = "Ya";
-        } else{
-            jawaban = "Nggak";
+    private String getRandomAnswer() {
+        String res = "";
+        Random random = new Random();
+        int num = random.nextInt();
+        if (num % 2 == 0) {
+            return "ya";
+        } else {
+            return "tidak";
         }
-        return jawaban;
     }
 
-    private void balasChatDenganRandomJawaban(String replyToken, String jawaban){
-        TextMessage jawabanDalamBentukTextMessage = new TextMessage(jawaban);
+    private void replyChatWithRandomAnswer(String replyToken, String answer) {
+        TextMessage answerInMessage = new TextMessage(answer);
         try {
-            lineMessagingClient
-                    .replyMessage(new ReplyMessage(replyToken, jawabanDalamBentukTextMessage))
-                    .get();
+            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, answerInMessage)).get();
         } catch (InterruptedException | ExecutionException e) {
             System.out.println("Ada error saat ingin membalas chat");
         }
     }
+
+
 
 }
