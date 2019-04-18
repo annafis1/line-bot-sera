@@ -33,9 +33,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
 
     @EventMapping
     public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
-        String msg = messageEvent.getMessage().getText();
+        String msg = messageEvent.getMessage().getText().toLowerCase();
         String[] msgSplit = msg.split(" ");
-        if (msgSplit[0].equals("Apakah")) {
+        if (msgSplit[0].equals("test")) {
             String answer = getRandomAnswer();
             String replyToken = messageEvent.getReplyToken();
             replyChatWithRandomAnswer(replyToken, answer);
