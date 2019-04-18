@@ -56,14 +56,11 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String getRandomAnswer() {
-        String res = "";
+        String answers = "Iya,Tidak,Mungkin";
+        String[] listAnswer = answers.split(",");
         Random random = new Random();
-        int num = random.nextInt();
-        if (num % 2 == 0) {
-            return "ya";
-        } else {
-            return "tidak";
-        }
+        int num = random.nextInt(listAnswer.length);
+        return listAnswer[num];
     }
 
     public void replyChatWithRandomAnswer(String replyToken, String answer) {
