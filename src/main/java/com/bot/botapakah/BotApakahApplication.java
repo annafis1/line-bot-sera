@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutionException;
 @SpringBootApplication
 @LineMessageHandler
 public class BotApakahApplication extends SpringBootServletInitializer {
+    public Random random = new Random();
 
     @Autowired
     public LineMessagingClient lineMessagingClient;
@@ -29,6 +30,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
+
         SpringApplication.run(BotApakahApplication.class, args);
     }
 
@@ -52,7 +54,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         String msg = messageEvent.getMessage().getText().toLowerCase();
         String[] msgSplit = msg.split(" ");
         if (msgSplit[0].equals("/apakah")) {
-            String answer = getRandomAnswer();
+            String answer = getYesNo();
             processChat(messageEvent, answer);
         } if (msgSplit[0].equals("/help")) {
             String answer = getInfo();
@@ -61,18 +63,16 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String category = msgSplit[1].toLowerCase();
             String answer = getImageLink(category);
             processChat(messageEvent, answer);
-
         }
     }
 
     public String getImageLink(String query) {
-        if (query.equals("sehat")) {
-            return "https://images-na.ssl-images-amazon.com/images/I/41FAM8Tx18L._SX466_.jpg";
-        } else if (query.equals("sedang")) {
-            return "";
-        } else if (query.equals("buruk")) {
-            return "";
-        } return "Tidak ada";
+        String links =  "https://images-na.ssl-images-amazon.com/images/I/41FAM8Tx18L._SX466_.jpg," +
+                        "https://cdn11.bigcommerce.com/s-hfhomm5/images/stencil/1280x1280/products/180/451/Solid_Red_Sized__25214.1507754519.jpg?c=2&imbypass=on," +
+                        "https://stoffe.kawaiifabric.com/images/product_images/large_img/solid-yellow-fabric-Robert-Kaufman-USA-Citrus-179483-1.JPG";
+        String res[] = links.split(",");
+        int num = random.nextInt(res.length);
+        return res[num];
     }
 
     public String getInfo() {
@@ -82,10 +82,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                 "\n Selamat mencoba";
     }
 
-    public String getRandomAnswer() {
+    public String getYesNo() {
         String answers = "Iya,Tidak,Mungkin";
         String[] listAnswer = answers.split(",");
-        Random random = new Random();
         int num = random.nextInt(listAnswer.length);
         return listAnswer[num];
     }
