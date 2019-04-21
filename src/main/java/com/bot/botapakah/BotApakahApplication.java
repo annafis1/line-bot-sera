@@ -78,6 +78,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String talk() {
+        int counter = 0;
+        String res = "";
         String chats = "Let's do our best today ^_^," +
                 "Something I like? Video games, anime, those kind of stuffs I like them ^_^;" +
                 "I don't really like to hang out with other people, but I'd love to hang out with you :);" +
@@ -85,8 +87,11 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                 "Don't be sad, I'm right here :);" +
                 "Let's play video games together someday :D ;";
         String[] chatList = chats.split(";");
-        int num = random.nextInt(chatList.length);
-        return chatList[num];
+        if (counter < chatList.length - 1) {
+            res = chatList[counter];
+            counter++;
+            return res;
+        } counter = 0; return chatList[counter];
     }
 
     public String setFgoKey(String newKey) {
