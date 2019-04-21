@@ -86,7 +86,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                 "I don't really like to hang out with other people, but I'd love to hang out with you :);" +
                 "Never give up on something you want to achieve ^_^;" +
                 "Don't be sad, I'm right here :);" +
-                "Let's play video games together someday :D ;";
+                "Let's play video games together someday :D ;" +
+                "I'm hungry, gimme food :<";
         String[] chatList = chats.split(";");
         if (counter < chatList.length - 1) {
             res = chatList[counter];
