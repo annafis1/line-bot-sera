@@ -91,10 +91,14 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                     "Y-you are the worst;" +
                     "N-not now.." +
                     "Nhaaa! No!;" +
-                    "PERVERT!";
+                    "PERVERT!;" +
+                    "P-please forgive my creator, he made me do this";
+//            String[] chatList = chats.split(";");
+//            int num = random.nextInt(chatList.length);
+//            return chatList[num];
             String[] chatList = chats.split(";");
-            int num = random.nextInt(chatList.length);
-            return chatList[num];
+            return method1(chatList, touchCounter);
+
     }
 
     public String talk() {
@@ -107,13 +111,18 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                 "Let's play video games together someday :D ;" +
                 "I'm hungry, gimme food :<";
         String[] chatList = chats.split(";");
-        if (talkCounter < chatList.length - 1) {
-            res = chatList[talkCounter];
-            talkCounter++;
+        return method1(chatList, talkCounter);
+    }
+
+    public String method1(String[] arr, int counter) {
+        String res = "";
+        if (counter < arr.length-1) {
+            res = arr[counter];
+            counter++;
             return res;
         }
-        res = chatList[talkCounter];
-        talkCounter = 0; return res;
+        res = arr[counter];
+        counter = 0; return res;
     }
 
     public String setFgoKey(String newKey) {
