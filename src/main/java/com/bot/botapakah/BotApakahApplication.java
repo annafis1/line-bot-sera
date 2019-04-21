@@ -58,7 +58,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         if (command.equals("/apakah")) {
             String answer = getYesNo();
             processChat(messageEvent, answer);
-        } if (command.equals("/help")) {
+        } if (msg.toLowerCase().contains("help")) {
             String answer = getInfo();
             processChat(messageEvent, answer);
         } if (command.equals("/lihatbmi")) {
@@ -93,6 +93,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         return "Berikut beberapa instruksi yang bisa ku jalankan ^_^:" +
                 "\n - /help" +
                 "\n - /apakah <statement yang kamu ingin tanya>" +
+                "\n - /fgokey -> untuk melihat key fgo yang kamu simpan" +
+                "\n - /setfgokey -> untuk mengubah key fgo" +
                 "\n Selamat mencoba";
     }
 
