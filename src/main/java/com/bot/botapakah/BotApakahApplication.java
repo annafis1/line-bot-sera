@@ -138,6 +138,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                 "\n - /fgokey -> untuk melihat key fgo yang kamu simpan" +
                 "\n - /setfgokey -> untuk mengubah key fgo" +
                 "\n - /talk -> interractive talk with me :D" +
+                "\n - /touch -> Hmph" +
                 "\n Selamat mencoba";
     }
 
