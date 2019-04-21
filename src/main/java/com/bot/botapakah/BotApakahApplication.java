@@ -92,7 +92,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             res = chatList[counter];
             counter++;
             return res;
-        } counter = 0; return chatList[counter];
+        }
+        res = chatList[counter];
+        counter = 0; return res;
     }
 
     public String setFgoKey(String newKey) {
