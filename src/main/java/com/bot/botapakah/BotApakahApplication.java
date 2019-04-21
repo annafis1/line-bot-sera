@@ -58,7 +58,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         if (command.equals("/apakah")) {
             String answer = getYesNo();
             processChat(messageEvent, answer);
-        } if (msg.toLowerCase().contains("help")) {
+        } if (msg.toLowerCase().contains("/help")) {
             String answer = getInfo();
             processChat(messageEvent, answer);
         } if (command.equals("/lihatbmi")) {
@@ -71,7 +71,21 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String newKey = msgSplit[1];
             String answer = setFgoKey(newKey);
             processChat(messageEvent, answer);
+        } if (command.equals("/talk")) {
+            String answer ;
         }
+    }
+
+    public String talk() {
+        String chats = "Let's do our best today ^_^," +
+                "Something I like? Video games, anime, those kind of stuffs I like them ^_^," +
+                "I don't really like to hang out with other people, but I'd love to hang out with you :)," +
+                "Never give up on something you want to achieve ^_^," +
+                "Don't be sad, I'm right here :)," +
+                "Let's play video games together someday :D";
+        String[] chatList = chats.split(",");
+        int num = random.nextInt(chatList.length);
+        return chatList[num];
     }
 
     public String setFgoKey(String newKey) {
@@ -90,11 +104,12 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String getInfo() {
-        return "Berikut beberapa instruksi yang bisa ku jalankan ^_^:" +
-                "\n - /help" +
-                "\n - /apakah <statement yang kamu ingin tanya>" +
+        return "Berikut beberapa instruksi yang bisa ku lakukan ^_^:" +
+                "\n - /help -> Melihat apasaja yang bisa ku lakukan" +
+                "\n - /apakah [statement yang kamu ingin tanya]" +
                 "\n - /fgokey -> untuk melihat key fgo yang kamu simpan" +
                 "\n - /setfgokey -> untuk mengubah key fgo" +
+                "\n - /talk -> interractive talk with me :D" +
                 "\n Selamat mencoba";
     }
 
