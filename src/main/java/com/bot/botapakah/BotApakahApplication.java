@@ -72,7 +72,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String answer = setFgoKey(newKey);
             processChat(messageEvent, answer);
         } if (command.equals("/talk")) {
-            String answer ;
+            String answer = talk();
+            processChat(messageEvent, answer);
         }
     }
 
