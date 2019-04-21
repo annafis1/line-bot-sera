@@ -79,12 +79,12 @@ public class BotApakahApplication extends SpringBootServletInitializer {
 
     public String talk() {
         String chats = "Let's do our best today ^_^," +
-                "Something I like? Video games, anime, those kind of stuffs I like them ^_^," +
-                "I don't really like to hang out with other people, but I'd love to hang out with you :)," +
-                "Never give up on something you want to achieve ^_^," +
-                "Don't be sad, I'm right here :)," +
-                "Let's play video games together someday :D";
-        String[] chatList = chats.split(",");
+                "Something I like? Video games, anime, those kind of stuffs I like them ^_^;" +
+                "I don't really like to hang out with other people, but I'd love to hang out with you :);" +
+                "Never give up on something you want to achieve ^_^;" +
+                "Don't be sad, I'm right here :);" +
+                "Let's play video games together someday :D ;";
+        String[] chatList = chats.split(";");
         int num = random.nextInt(chatList.length);
         return chatList[num];
     }
