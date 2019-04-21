@@ -80,7 +80,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public String talk() {
         int counter = 0;
         String res = "";
-        String chats = "Let's do our best today ^_^," +
+        String chats = "Let's do our best today ^_^;" +
                 "Something I like? Video games, anime, those kind of stuffs I like them ^_^;" +
                 "I don't really like to hang out with other people, but I'd love to hang out with you :);" +
                 "Never give up on something you want to achieve ^_^;" +
