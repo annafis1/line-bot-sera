@@ -52,21 +52,22 @@ public class BotApakahApplication extends SpringBootServletInitializer {
 
     @EventMapping
     public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
-        String msg = messageEvent.getMessage().getText().toLowerCase();
+        String msg = messageEvent.getMessage().getText();
         String[] msgSplit = msg.split(" ");
-        if (msgSplit[0].equals("/apakah")) {
+        String command = msgSplit[0].toLowerCase();
+        if (command.equals("/apakah")) {
             String answer = getYesNo();
             processChat(messageEvent, answer);
-        } if (msgSplit[0].equals("/help")) {
+        } if (command.equals("/help")) {
             String answer = getInfo();
             processChat(messageEvent, answer);
-        } if (msgSplit[0].equals("/lihatbmi")) {
+        } if (command.equals("/lihatbmi")) {
             String category = msgSplit[1].toLowerCase();
             String answer = getImageLink(category);
             processChat(messageEvent, answer);
-        } if (msgSplit[0].equals("/fgokey")) {
+        } if (command.equals("/fgokey")) {
             processChat(messageEvent, fgokey);
-        } if (msgSplit[0].equals("/setfgokey")) {
+        } if (command.equals("/setfgokey")) {
             String newKey = msgSplit[1];
             String answer = setFgoKey(newKey);
             processChat(messageEvent, answer);
