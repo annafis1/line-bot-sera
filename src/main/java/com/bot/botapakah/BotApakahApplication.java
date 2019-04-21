@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 public class BotApakahApplication extends SpringBootServletInitializer {
     public Random random = new Random();
     public String fgokey = "null";
+    public int counter = 0;
 
     @Autowired
     public LineMessagingClient lineMessagingClient;
@@ -78,7 +79,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String talk() {
-        int counter = 0;
+
         String res = "";
         String chats = "Let's do our best today ^_^;" +
                 "Something I like? Video games, anime, those kind of stuffs I like them ^_^;" +
