@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 @LineMessageHandler
 public class BotApakahApplication extends SpringBootServletInitializer {
     public Random random = new Random();
-    public String fgokey = "";
+    public String fgokey = "JB3J2hNT8b";
 
     @Autowired
     public LineMessagingClient lineMessagingClient;
