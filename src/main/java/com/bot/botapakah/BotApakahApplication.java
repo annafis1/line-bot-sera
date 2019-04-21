@@ -21,7 +21,8 @@ import java.util.concurrent.ExecutionException;
 public class BotApakahApplication extends SpringBootServletInitializer {
     public Random random = new Random();
     public String fgokey = "null";
-    public int counter = 0;
+    public int talkCounter = 0;
+    public int touchCounter = 0;
 
     @Autowired
     public LineMessagingClient lineMessagingClient;
@@ -75,11 +76,28 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         } if (command.equals("/talk")) {
             String answer = talk();
             processChat(messageEvent, answer);
+        } if (command.equals("/touch")) {
+            String respond = touch();
+            processChat(messageEvent, respond);
         }
     }
 
-    public String talk() {
+    public String touch() {
+            String res = "";
+            String chats = "N-not THERE! You pervert;" +
+                    "Nnnhh, s-stop;" +
+                    "Hya?! W-Wh-WHERE do you think you are touching!;" +
+                    "P-please stop;" +
+                    "Y-you are the worst;" +
+                    "N-not now.." +
+                    "Nhaaa! No!;" +
+                    "PERVERT!";
+            String[] chatList = chats.split(";");
+            int num = random.nextInt(chatList.length);
+            return chatList[num];
+    }
 
+    public String talk() {
         String res = "";
         String chats = "Let's do our best today ^_^;" +
                 "Something I like? Video games, anime, those kind of stuffs I like them ^_^;" +
@@ -89,13 +107,13 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                 "Let's play video games together someday :D ;" +
                 "I'm hungry, gimme food :<";
         String[] chatList = chats.split(";");
-        if (counter < chatList.length - 1) {
-            res = chatList[counter];
-            counter++;
+        if (talkCounter < chatList.length - 1) {
+            res = chatList[talkCounter];
+            talkCounter++;
             return res;
         }
-        res = chatList[counter];
-        counter = 0; return res;
+        res = chatList[talkCounter];
+        talkCounter = 0; return res;
     }
 
     public String setFgoKey(String newKey) {
