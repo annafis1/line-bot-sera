@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 @LineMessageHandler
 public class BotApakahApplication extends SpringBootServletInitializer {
     public Random random = new Random();
+    public String fgokey = "";
 
     @Autowired
     public LineMessagingClient lineMessagingClient;
@@ -63,7 +64,19 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String category = msgSplit[1].toLowerCase();
             String answer = getImageLink(category);
             processChat(messageEvent, answer);
+        } if (msgSplit[0].equals("/fgokey")) {
+            processChat(messageEvent, fgokey);
+        } if (msgSplit[0].equals("/setfgokey")) {
+            String newKey = msgSplit[1];
+            String answer = setFgoKey(newKey);
+            processChat(messageEvent, answer);
         }
+    }
+
+    public String setFgoKey(String newKey) {
+        fgokey = newKey;
+        return String.format("Key berhasil diubah, key kamu sekarang adalah:" +
+                "\n\n%s",fgokey);
     }
 
     public String getImageLink(String query) {
