@@ -117,13 +117,15 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                 "Let's play video games together someday :D ;" +
                 "I'm hungry, gimme food :<";
         String[] chatList = chats.split(";");
-        if (talkCounter < chatList.length - 1) {
-            res = chatList[talkCounter];
-            talkCounter++;
-            return res;
-        }
-        res = chatList[talkCounter];
-        talkCounter = 0; return res;
+//        if (talkCounter < chatList.length - 1) {
+//            res = chatList[talkCounter];
+//            talkCounter++;
+//            return res;
+//        }
+//        res = chatList[talkCounter];
+//        talkCounter = 0; return res;
+        int num = random.nextInt(chatList.length); res = chatList[num];
+        return res;
     }
 
     public String setFgoKey(String newKey) {
