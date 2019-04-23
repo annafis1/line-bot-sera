@@ -84,7 +84,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
 
     public String touch() {
             String res = "";
-            String chats = "N-not THERE! You pervert;" +
+            String chats = "N-not THERE!;" +
                     "Nnnhh, s-stop;" +
                     "Hya?! W-Wh-WHERE do you think you are touching!;" +
                     "P-please stop;" +
@@ -92,6 +92,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                     "N-not now.." +
                     "Nhaaa! No!;" +
                     "PERVERT!;" +
+                    "Eeeep!;" +
                     "P-please forgive my creator, he made me do this";
             String[] chatList = chats.split(";");
             int num = random.nextInt(chatList.length);
