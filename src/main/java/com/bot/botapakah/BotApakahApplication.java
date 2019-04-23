@@ -97,14 +97,6 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String[] chatList = chats.split(";");
             int num = random.nextInt(chatList.length);
             return chatList[num];
-//            String[] chatList = chats.split(";");
-//            if (touchCounter < chatList.length - 1) {
-//                res = chatList[touchCounter];
-//                touchCounter++;
-//                return res;
-//            }
-//            res = chatList[touchCounter];
-//            touchCounter = 0; return res;
 
     }
 
