@@ -119,7 +119,6 @@ public class BotApakahApplication extends SpringBootServletInitializer {
 //        talkCounter = 0; return res;
         int num = random.nextInt(chatList.length); res = chatList[num];
         return res;
-
     }
 
     public String setFgoKey(String newKey) {
