@@ -79,6 +79,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         } if (command.equals("/touch")) {
             String respond = touch();
             processChat(messageEvent, respond);
+        } if (command.equals("/test")) {
+            String respond = "Test";
+            processChat(messageEvent, respond);
         }
     }
 
