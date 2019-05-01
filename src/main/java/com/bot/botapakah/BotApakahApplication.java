@@ -5,6 +5,7 @@ import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.message.ImageMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import com.linecorp.bot.model.event.message.ImageMessageContent;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
@@ -47,46 +50,62 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         }
     }
 
-    public void processChat(MessageEvent<TextMessageContent> event, String output) {
+    public void processImageEvent(MessageEvent<TextMessageContent> event, String url) {
+        String replyToken = event.getReplyToken();
+        try {
+            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, new ImageMessage(url, url))).get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println("Cant get image");
+        }
+    }
+
+    public void processTextEvent(MessageEvent<TextMessageContent> event, String output) {
         String replyToken = event.getReplyToken();
         replyChat(replyToken, output);
     }
 
     @EventMapping
     public void handleTextEvent(MessageEvent<TextMessageContent> messageEvent) {
-        String msg = messageEvent.getMessage().getText();
+        String msg = messageEvent.getMessage().getText();   // input di chat
         String[] msgSplit = msg.split(" ");
         String command = msgSplit[0].toLowerCase();
         if (command.equals("/apakah")) {
             String answer = getYesNo();
-            processChat(messageEvent, answer);
+            processTextEvent(messageEvent, answer);
         } if (msg.toLowerCase().contains("/help")) {
             String answer = getInfo();
-            processChat(messageEvent, answer);
+            processTextEvent(messageEvent, answer);
         } if (command.equals("/lihatbmi")) {
             String category = msgSplit[1].toLowerCase();
             String answer = getImageLink(category);
-            processChat(messageEvent, answer);
+            processTextEvent(messageEvent, answer);
         } if (command.equals("/fgokey")) {
-            processChat(messageEvent, fgokey);
+            processTextEvent(messageEvent, fgokey);
         } if (command.equals("/setfgokey")) {
             String newKey = msgSplit[1];
             String answer = setFgoKey(newKey);
-            processChat(messageEvent, answer);
+            processTextEvent(messageEvent, answer);
         } if (command.equals("/talk")) {
             String answer = talk();
-            processChat(messageEvent, answer);
+            processTextEvent(messageEvent, answer);
         } if (command.equals("/touch")) {
             String respond = touch();
-            processChat(messageEvent, respond);
-        } if (command.equals("/test")) {
-            String respond = "Test2";
-            processChat(messageEvent, respond);
+            processTextEvent(messageEvent, respond);
+        } if (command.equals("/rin")) {
+            String url = "https://ih0.redbubble.net/image.204577888.6515/pp,550x550.jpg";
+            processImageEvent(messageEvent, url);
         }
     }
 
+    // @EventMapping
+    // public void handleImageMessageEvent(MessageEvent<ImageMessageContent> event) throws IOException {
+    //     String url = "https://ih0.redbubble.net/image.204577888.6515/pp,550x550.jpg";
+    //     ImageMessage imageUrl = new ImageMessage(url, url);
+    //     String replyToken = event.getReplyToken();
+
+    // }
+
     public String touch() {
-            String res = "";
             String chats = "N-not THERE!;" +
                     "Nnnhh, s-stop;" +
                     "Hya?! W-Wh-WHERE do you think you are touching!;" +
@@ -95,8 +114,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
                     "N-not now.." +
                     "Nhaaa! No!;" +
                     "PERVERT!;" +
-                    "Eeeep!;" +
-                    "P-please forgive my creator, he made me do this";
+                    "Eeeep!;";
             String[] chatList = chats.split(";");
             int num = random.nextInt(chatList.length);
             return chatList[num];
