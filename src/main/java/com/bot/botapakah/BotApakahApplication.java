@@ -80,7 +80,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String respond = touch();
             processChat(messageEvent, respond);
         } if (command.equals("/test")) {
-            String respond = "Test";
+            String respond = "Test2";
             processChat(messageEvent, respond);
         }
     }
