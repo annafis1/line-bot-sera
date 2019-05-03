@@ -50,7 +50,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         }
     }
 
-    public void processImageEvent(MessageEvent<TextMessageContent> event, String url) {
+    public void replyImage(MessageEvent<TextMessageContent> event, String url) {
         String replyToken = event.getReplyToken();
         try {
             lineMessagingClient.replyMessage(new ReplyMessage(replyToken, new ImageMessage(url, url))).get();
@@ -92,18 +92,20 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String respond = touch();
             processTextEvent(messageEvent, respond);
         } if (command.equals("/rin")) {
-            String url = "https://ih0.redbubble.net/image.204577888.6515/pp,550x550.jpg";
-            processImageEvent(messageEvent, url);
+            String url = getImageURL();
+            replyImage(messageEvent, url);
         }
     }
-
-    // @EventMapping
-    // public void handleImageMessageEvent(MessageEvent<ImageMessageContent> event) throws IOException {
-    //     String url = "https://ih0.redbubble.net/image.204577888.6515/pp,550x550.jpg";
-    //     ImageMessage imageUrl = new ImageMessage(url, url);
-    //     String replyToken = event.getReplyToken();
-
-    // }
+    
+    public String getImageURL() {
+        String urls = 
+            "https://ih0.redbubble.net/image.204577888.6515/pp,550x550.jpg;" +
+            "https://i.pinimg.com/originals/3a/d0/fa/3ad0faf0bdf0afe02e9118cc286bbc8f.png;" +
+            "https://i.ebayimg.com/images/g/dQoAAOSwnpBbRH1F/s-l300.jpg";
+        String listURL[] = urls.split(";");
+        int idx = random.nextInt(listURL.length);
+        return listURL[idx];
+    }
 
     public String touch() {
             String chats = "N-not THERE!;" +
