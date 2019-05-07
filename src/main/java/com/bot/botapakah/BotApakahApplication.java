@@ -79,12 +79,6 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String category = msgSplit[1].toLowerCase();
             String answer = getImageLink(category);
             processTextEvent(messageEvent, answer);
-        } if (command.equals("/fgokey")) {
-            processTextEvent(messageEvent, fgokey);
-        } if (command.equals("/setfgokey")) {
-            String newKey = msgSplit[1];
-            String answer = setFgoKey(newKey);
-            processTextEvent(messageEvent, answer);
         } if (command.equals("/talk")) {
             String answer = talk();
             processTextEvent(messageEvent, answer);
@@ -92,12 +86,15 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String respond = touch();
             processTextEvent(messageEvent, respond);
         } if (command.equals("/rin")) {
-            String url = getImageURL();
+            String url = getRinURL();
+            replyImage(messageEvent, url);
+        } if (command.equals("/health")) {
+            String url = getHealthURL();
             replyImage(messageEvent, url);
         }
     }
     
-    public String getImageURL() {
+    public String getRinURL() {
         String urls = 
             "https://ih0.redbubble.net/image.204577888.6515/pp,550x550.jpg;" +
             "https://i.pinimg.com/originals/3a/d0/fa/3ad0faf0bdf0afe02e9118cc286bbc8f.png;" +
@@ -105,6 +102,18 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         String listURL[] = urls.split(";");
         int idx = random.nextInt(listURL.length);
         return listURL[idx];
+    }
+
+    public String getHealthURL() {
+        String urls = "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png;" +    // red
+        "https://i.paste.pics/61c732db168a0a6423098789a7161810.png;" +      // yellow
+        "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
+        String[] url = urls.split(";");
+        int counter = 0;
+        String result = url[counter];
+        if (counter == url.length-1) counter = 0;
+        else counter++;
+        return result;
     }
 
     public String touch() {
