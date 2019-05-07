@@ -106,15 +106,15 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         return listURL[idx];
     }
 
-    public String getHealthURL(int index) {
+    public String getHealthURL() {
         String urls = "https://i.paste.pics/adb6976ec591cee8ad1bb01bd0290c9c.png;" +    // red
         "https://i.paste.pics/61c732db168a0a6423098789a7161810.png;" +      // yellow
         "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
         String[] url = urls.split(";");
         String result = "";
-        if (index == url.length) {
-            index = 0; return url[index];
-        } result = url[index];  return result;
+        if (idxHealth == url.length) {
+            idxHealth = 0; return url[idxHealth];
+        } result = url[idxHealth];  return result;
     }
 
     public String touch() {
