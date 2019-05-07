@@ -91,7 +91,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String url = getRinURL();
             replyImage(messageEvent, url);
         } if (command.equals("/health")) {
-            String url = getHealthURL(idxHealth++);
+            String url = getHealthURL();
             replyImage(messageEvent, url);
         }
     }
