@@ -112,7 +112,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
         String[] url = urls.split(";");
         String result = "";
-        if (index == url.length-1) {
+        if (index == url.length) {
             index = 0; return url[index];
         } result = url[index];  return result;
     }
