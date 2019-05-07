@@ -113,7 +113,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         String result = "";
         if (healthCounter == url.length-1) {
             healthCounter = 0; return url[healthCounter];
-        } result = url[healthCounter++]; return result;
+        } result = url[healthCounter]; 
+        healthCounter++; return result;
     }
 
     public String touch() {
