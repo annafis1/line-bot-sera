@@ -26,7 +26,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public String fgokey = "null";
     public int talkCounter = 0;
     public int touchCounter = 0;
-
+    int idxHealth = 0;    // index for health meter
+    
     @Autowired
     public LineMessagingClient lineMessagingClient;
 
@@ -69,6 +70,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         String msg = messageEvent.getMessage().getText();   // input di chat
         String[] msgSplit = msg.split(" ");
         String command = msgSplit[0].toLowerCase();
+
         if (command.equals("/apakah")) {
             String answer = getYesNo();
             processTextEvent(messageEvent, answer);
@@ -89,7 +91,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String url = getRinURL();
             replyImage(messageEvent, url);
         } if (command.equals("/health")) {
-            String url = getHealthURL();
+            String url = getHealthURL(idxHealth++);
             replyImage(messageEvent, url);
         }
     }
@@ -104,17 +106,15 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         return listURL[idx];
     }
 
-    public String getHealthURL() {
-        int idx = 0;
+    public String getHealthURL(int index) {
         String urls = "https://i.paste.pics/adb6976ec591cee8ad1bb01bd0290c9c.png;" +    // red
         "https://i.paste.pics/61c732db168a0a6423098789a7161810.png;" +      // yellow
         "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
         String[] url = urls.split(";");
         String result = "";
-        if (idx == url.length-1) {
-            idx = 0; return url[idx];
-        } result = url[idx]; 
-        idx++; return result;
+        if (index == url.length-1) {
+            index = 0; return url[index];
+        } result = url[index];  return result;
     }
 
     public String touch() {
