@@ -26,6 +26,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public String fgokey = "null";
     public int talkCounter = 0;
     public int touchCounter = 0;
+    private int healthCounter = 0;
 
     @Autowired
     public LineMessagingClient lineMessagingClient;
@@ -110,13 +111,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
         String[] url = urls.split(";");
         String result = "";
-        int counter = 0;
-        if (counter < url.length-1) {
-            result = url[counter];
-            counter++;
-            return result;
-        } result = url[counter];
-        counter = 0; return result;
+        if (healthCounter == url.length-1) {
+            healthCounter = 0; return url[healthCounter];
+        } result = url[healthCounter++]; return result;
     }
 
     public String touch() {
