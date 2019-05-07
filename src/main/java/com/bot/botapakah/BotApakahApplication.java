@@ -26,7 +26,6 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public String fgokey = "null";
     public int talkCounter = 0;
     public int touchCounter = 0;
-    private int healthCounter = 0;
 
     @Autowired
     public LineMessagingClient lineMessagingClient;
@@ -106,15 +105,16 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String getHealthURL() {
-        String urls = "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png;" +    // red
+        int idx = 0;
+        String urls = "https://i.paste.pics/adb6976ec591cee8ad1bb01bd0290c9c.png;" +    // red
         "https://i.paste.pics/61c732db168a0a6423098789a7161810.png;" +      // yellow
         "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
         String[] url = urls.split(";");
         String result = "";
-        if (healthCounter == url.length-1) {
-            healthCounter = 0; return url[healthCounter];
-        } result = url[healthCounter]; 
-        healthCounter++; return result;
+        if (idx == url.length-1) {
+            idx = 0; return url[idx];
+        } result = url[idx]; 
+        idx++; return result;
     }
 
     public String touch() {
