@@ -110,12 +110,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
         String[] url = urls.split(";");
         int counter = 0;
-        String result = url[counter];
-        if (counter == url.length-1) {
-            counter = 0; return url[counter];
-        } else {
-            counter++; return url[counter];
-        }
+        String result = url[counter]; counter++;
+        if (counter == url.length) counter = 0;
+        return result;
     }
 
     public String touch() {
