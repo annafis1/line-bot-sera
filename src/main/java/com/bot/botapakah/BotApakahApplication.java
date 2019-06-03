@@ -52,9 +52,10 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public void replyImage(MessageEvent<TextMessageContent> event, String url) {
+        ImageMessage image_msg = new ImageMessage(url, url);
         String replyToken = event.getReplyToken();
         try {
-            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, new ImageMessage(url, url))).get();
+            lineMessagingClient.replyMessage(new ReplyMessage(replyToken, image_msg)).get();
         } catch (InterruptedException | ExecutionException e) {
             System.out.println("Cant get image");
         }
@@ -77,10 +78,6 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         } if (msg.toLowerCase().contains("/help")) {
             String answer = getInfo();
             processTextEvent(messageEvent, answer);
-        } if (command.equals("/lihatbmi")) {
-            String category = msgSplit[1].toLowerCase();
-            String answer = getImageLink(category);
-            processTextEvent(messageEvent, answer);
         } if (command.equals("/talk")) {
             String answer = talk();
             processTextEvent(messageEvent, answer);
@@ -90,10 +87,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         } if (command.equals("/rin")) {
             String url = getRinURL();
             replyImage(messageEvent, url);
-        } if (command.equals("/health")) {
-            String url = getHealthURL();
-            replyImage(messageEvent, url);
-        }
+        } 
     }
     
     public String getRinURL() {
@@ -104,18 +98,6 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         String listURL[] = urls.split(";");
         int idx = random.nextInt(listURL.length);
         return listURL[idx];
-    }
-
-    public String getHealthURL() {
-        String urls = "https://i.paste.pics/adb6976ec591cee8ad1bb01bd0290c9c.png;" +    // red
-        "https://i.paste.pics/61c732db168a0a6423098789a7161810.png;" +      // yellow
-        "https://i.paste.pics/d25a36be8df368751d3bf12ecc84bfcb.png";        // green
-        String[] url = urls.split(";");
-        String result = "";
-        if (idxHealth == url.length-1) {
-            result = url[idxHealth];
-            idxHealth = 0; return result;
-        } result = url[idxHealth++]; return result;
     }
 
     public String touch() {
@@ -155,29 +137,13 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         return res;
     }
 
-    public String setFgoKey(String newKey) {
-        fgokey = newKey;
-        return String.format("Key berhasil diubah, key kamu sekarang adalah:" +
-                "\n\n%s",fgokey);
-    }
-
-    public String getImageLink(String query) {
-        String links =  "https://images-na.ssl-images-amazon.com/images/I/41FAM8Tx18L._SX466_.jpg," +
-                        "https://cdn11.bigcommerce.com/s-hfhomm5/images/stencil/1280x1280/products/180/451/Solid_Red_Sized__25214.1507754519.jpg?c=2&imbypass=on," +
-                        "https://stoffe.kawaiifabric.com/images/product_images/large_img/solid-yellow-fabric-Robert-Kaufman-USA-Citrus-179483-1.JPG";
-        String res[] = links.split(",");
-        int num = random.nextInt(res.length);
-        return res[num];
-    }
-
     public String getInfo() {
         return "Berikut beberapa instruksi yang bisa ku lakukan ^_^:" +
                 "\n - /help -> Melihat apasaja yang bisa ku lakukan" +
                 "\n - /apakah [statement yang kamu ingin tanya]" +
-                "\n - /fgokey -> untuk melihat key fgo yang kamu simpan" +
-                "\n - /setfgokey -> untuk mengubah key fgo" +
                 "\n - /talk -> interractive talk with me :D" +
                 "\n - /touch -> Hmph" +
+                "\n - /rin -> Get random image of Rin Kagamine from Vocaloid" +
                 "\n Selamat mencoba";
     }
 
