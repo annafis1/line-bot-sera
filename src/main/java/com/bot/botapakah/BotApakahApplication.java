@@ -138,13 +138,13 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     }
 
     public String getInfo() {
-        return "Berikut beberapa instruksi yang bisa ku lakukan ^_^:" +
+        return "These are the instructions that I can do for u ^_^:" +
                 "\n - /help -> Melihat apasaja yang bisa ku lakukan" +
                 "\n - /apakah [statement yang kamu ingin tanya]" +
                 "\n - /talk -> interractive talk with me :D" +
                 "\n - /touch -> Hmph" +
                 "\n - /rin -> Get random image of Rin Kagamine from Vocaloid" +
-                "\n Selamat mencoba";
+                "\n Have fun trying";
     }
 
     public String getYesNo() {
