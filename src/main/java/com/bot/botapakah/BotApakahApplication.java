@@ -87,7 +87,11 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         } if (command.equals("/rin")) {
             String url = getRinURL();
             replyImage(messageEvent, url);
-        } 
+        } if (command.equals("/shrug")) {
+            String backslash = "\\";
+            String shrug = "¯" + backslash + "_(ツ)_/¯";
+            processTextEvent(messageEvent, shrug);
+        }
     }
     
     public String getRinURL() {
