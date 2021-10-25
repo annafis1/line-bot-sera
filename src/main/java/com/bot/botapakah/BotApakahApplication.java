@@ -91,6 +91,8 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String backslash = "\\";
             String shrug = "¯" + backslash + "_(ツ)_/¯";
             processTextEvent(messageEvent, shrug);
+        } if (command.equals("/hacktober")) {
+            processTextEvent(messageEvent, "Hacktoberfest 2021");
         }
     }
     
