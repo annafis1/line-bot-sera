@@ -93,6 +93,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             processTextEvent(messageEvent, shrug);
         } if (command.equals("/hacktober")) {
             String msg = "Celebrating Hacktoberfest 2021";
+            msg = msg + "!!";
             processTextEvent(messageEvent, msg);
         }
     }
