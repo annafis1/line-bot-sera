@@ -96,7 +96,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             msg = msg + "!!";
             processTextEvent(messageEvent, msg);
         } if (command.equals("/hacktober image")) {
-            String img_url = getHacktoberImage();
+            String img_url = getHacktober2021Image();
             processTextEvent(messageEvent, img_url);
         }
     }
@@ -111,9 +111,10 @@ public class BotApakahApplication extends SpringBootServletInitializer {
         return listURL[idx];
     }
 
-    public String getHacktoberImage() {
+    public String getHacktober2021Image() {
         String[] urls = [
             "https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hacktoberfest-full.f42e3b1.svg",
+            "https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hf-icon.6b4a329.svg",
         ];
         int choice = random.nextInt(urls.length);
         String result = urls[choice];
