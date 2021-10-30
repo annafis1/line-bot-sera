@@ -114,7 +114,7 @@ public class BotApakahApplication extends SpringBootServletInitializer {
     public String getHacktober2021Image() {
         String[] urls = [
             "https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hacktoberfest-full.f42e3b1.svg",
-            "https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hf-icon.6b4a329.svg"
+            "https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hf-icon.6b4a329.svg",
         ];
         int choice = random.nextInt(urls.length);
         String result = urls[choice];
