@@ -95,6 +95,9 @@ public class BotApakahApplication extends SpringBootServletInitializer {
             String msg = "Celebrating Hacktoberfest 2021";
             msg = msg + "!!";
             processTextEvent(messageEvent, msg);
+        } if (command.equals("/hacktober image")) {
+            String img_url = "https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hacktoberfest-full.f42e3b1.svg";
+            processTextEvent(messageEvent, img_url);
         }
     }
     
